@@ -1,8 +1,17 @@
+/** Ohjelma joka ottaa vastaan käyttäjältä
+*   henkilön perustietoja. Kommentoitia lisää
+*   myöhemmin..
+*/
+
 #include <iostream>
 #include <string>
 
 using namespace std;
 
+/** tietue joka tulee pitämään sisällään
+*   nimen, koulumatkan pituuden sekä hatun
+*   koon
+*/
 struct tietue {
     string etunimi;
     float koulumatka;
@@ -12,11 +21,13 @@ struct tietue {
 
 int main()
 {
+    // tietuetaulukon kokona 10 alkiota
     tietue hRekisteri[10];
     int valinta = 99;
     int kohta = 0;
 
     do {
+        // Valikko näkyville
         cout << endl;
         cout << "VALIKKO" << endl;
         cout << "0 - Lopeta" << endl;
