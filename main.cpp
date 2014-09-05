@@ -119,6 +119,10 @@ void TulostaHenkilo(tietue TIEDOT[]) {
     }
 }
 
+/** Listaa kaikki henkilöt lkm kokoisessa
+*   taulukossa TIEDOT
+*
+*/
 void TulostaKaikkiHenkilot(tietue TIEDOT [], int lkm) {
     for (int a = 0; a < lkm; a++) {
         cout << "Henkilö " << a << ": " << TIEDOT[a].etunimi << " "
