@@ -1,7 +1,7 @@
 /** Ohjelma joka ottaa vastaan käyttäjältä
 *   henkilön perustietoja. Kun taulukko täynnä
-*   ohjelma virheellisesti voi lisätä vielä tietoja
-*   jotka menevät viimeiseen soluun
+*   ohjelma ilmoittaa siitä.
+*
 */
 
 #include <iostream>
