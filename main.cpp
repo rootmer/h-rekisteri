@@ -9,9 +9,10 @@
 
 using namespace std;
 
-/** tietue joka tulee pit‰m‰‰n sis‰ll‰‰n
+/** Tietue joka tulee pit‰m‰‰n sis‰ll‰‰n
 *   nimen, koulumatkan pituuden sek‰ hatun
-*   koon
+*   koon. Oletuksena etunimi- j‰sen alustetaan tilaan
+*   "empty" jotta voidaan tiet‰‰ mik‰ alkio on ns. tyhj‰.
 */
 struct tietue {
     string etunimi;
@@ -20,30 +21,45 @@ struct tietue {
     tietue(): etunimi("empty"), koulumatka(0.0), hattukoko(0) {}
 };
 
-int taulunkoko = 2;
+/** Globaalien muuttujien m‰‰rittelyt. Taulukon koko
+*   m‰‰ritetty vakiomuuttujassa. tauluTemp t‰ss‰ koska
+*   osoitinta ei voi m‰‰ritt‰‰ vakion kautta. Aliohjelmien
+*   esim‰‰ritykset myˆs.
+*/
+const int taulunkoko = 10;
+int tauluTemp = taulunkoko;
+int *pTauluKoko = &tauluTemp;
+bool taynna = false;
 
 int valikko(void);
 void TulostaHenkilo(tietue TIEDOT[]);
 void TulostaKaikkiHenkilot(tietue TIEDOT[], int lkm);
 void LisaaHenkilo(tietue TIEDOT[], int *lkm);
 
+/** Ohjelman main funktio
+*
+*/
 int main(void)
 {
-    // tietuetaulukon kokona 10 alkiota
+    /** tietuetaulukon kokona 10 alkiota,
+    *   m‰‰ritetty vakiomuuttujassa taulunkoko
+    */
     tietue hRekisteri[taulunkoko];
     int valinta = 99;
-    int kohta = 0;
 
     do {
+
+        /** Valikosta poistuminen
+        *   syˆtt‰m‰ll‰ 0
+        */
         valinta = valikko();
         if (valinta == 0) { break; }
 
-        /** Oletuksena taulukon etunimi- j‰sen on "empty" jotta voidaan tiet‰‰ mik‰
-        *   alkio on ns. tyhj‰. Ohjelma siis etsii aluksi tyhj‰n kohdan johon voi lis‰t‰
-        *   henkilˆtietoja.
+        /** Valikosta valinnalla 1
+        *   lis‰t‰‰n henkilˆtieto
         */
         else if (valinta == 1) {
-                int* pTauluKoko = &taulunkoko;
+
                 LisaaHenkilo(hRekisteri,pTauluKoko);
         }
 
@@ -78,6 +94,9 @@ int valikko(void) {
     return valinta;
 }
 
+/** Aliohjelma joka hakee henkilˆn tiedot
+*   syˆtetyn nimen perusteella
+*/
 void TulostaHenkilo(tietue TIEDOT[]) {
     string nimi;
     cout << "Syˆt‰ hakemasi henkilˆn etunimi" << endl;
@@ -98,7 +117,7 @@ void TulostaHenkilo(tietue TIEDOT[]) {
 }
 
 /** Listaa kaikki henkilˆt lkm kokoisessa
-*   taulukossa TIEDOT
+*   tietuetaulukossa TIEDOT
 *
 */
 void TulostaKaikkiHenkilot(tietue TIEDOT[], int lkm) {
@@ -108,11 +127,12 @@ void TulostaKaikkiHenkilot(tietue TIEDOT[], int lkm) {
     }
 }
 
+/** Henkilˆn lis‰‰miseen tarkoitettu
+*   aliohjelma. Tarkistaa myˆs onko tilaa tiedoille.
+*/
 void LisaaHenkilo(tietue TIEDOT[], int *lkm) {
-    int listattavaa = lkm;
     int kohta = 99;
-    bool taynna = false;
-    for (int a = 0; a < listattavaa; a++) {
+    for (int a = 0; a < *lkm; a++) {
         if (TIEDOT[a].etunimi == "empty") {
             kohta = a;
             break;
@@ -132,7 +152,7 @@ void LisaaHenkilo(tietue TIEDOT[], int *lkm) {
         TIEDOT[kohta].etunimi = eNimi;
         TIEDOT[kohta].koulumatka = kMatka;
         TIEDOT[kohta].hattukoko = hKoko;
-        if (kohta == listattavaa - 1) { taynna = true; }
+        if (kohta == *lkm - 1) { taynna = true; }
     }
 
     else if (taynna) { cout << endl << "Taulukko t‰ynn‰!" << endl; }
