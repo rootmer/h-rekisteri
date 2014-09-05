@@ -22,6 +22,8 @@ struct tietue {
 
 const int taulunkoko = 2;
 
+int valikko(void);
+
 int main()
 {
     // tietuetaulukon kokona 10 alkiota
@@ -31,14 +33,7 @@ int main()
     bool taynna = false;
 
     do {
-        // Valikko n‰kyville
-        cout << endl;
-        cout << "VALIKKO" << endl;
-        cout << "0 - Lopeta" << endl;
-        cout << "1 - Lisaa henkilo" << endl;
-        cout << "2 - Listaa kaikki henkilot" << endl;
-        cin >> valinta;
-
+        valinta = valikko();
         if (valinta == 0) { break; }
 
         /** Oletuksena taulukon etunimi- j‰sen on "empty" jotta voidaan tiet‰‰ mik‰
@@ -85,4 +80,18 @@ int main()
         else cout << "Valitse uudelleen";
 
     } while (valinta != 0);
+}
+
+/** Valikko n‰kyville
+*   nyt aliohjelmana
+*/
+int valikko(void) {
+    int valinta = 99;
+    cout << endl;
+    cout << "VALIKKO" << endl;
+    cout << "0 - Lopeta" << endl;
+    cout << "1 - Lisaa henkilo" << endl;
+    cout << "2 - Listaa kaikki henkilot" << endl;
+    cin >> valinta;
+    return valinta;
 }
