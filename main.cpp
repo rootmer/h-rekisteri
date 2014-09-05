@@ -23,6 +23,7 @@ struct tietue {
 const int taulunkoko = 2;
 
 int valikko(void);
+void TulostaHenkilo(tietue TIEDOT[]);
 
 int main()
 {
@@ -72,8 +73,8 @@ int main()
         */
         else if (valinta == 2) {
             for (int a = 0; a < taulunkoko; a++) {
-                cout << "Henkilö " << a << ": " << hRekisteri[a].etunimi << " "
-                << hRekisteri[a].koulumatka << " " << hRekisteri[a].hattukoko << endl;
+            cout << "Henkilö " << a << ": " << hRekisteri[a].etunimi << " "
+            << hRekisteri[a].koulumatka << " " << hRekisteri[a].hattukoko << endl;
             }
         }
 
@@ -94,4 +95,23 @@ int valikko(void) {
     cout << "2 - Listaa kaikki henkilot" << endl;
     cin >> valinta;
     return valinta;
+}
+
+void TulostaHenkilo(tietue TIEDOT[]) {
+    string nimi;
+    cout << "Syötä hakemasi henkilön etunimi" << endl;
+    cin >> nimi;
+
+    for (int a = 0; a < taulunkoko; a++) {
+        if (TIEDOT[a].etunimi == nimi) {
+            cout << endl << "Löytyi henkilö: " << TIEDOT[a].etunimi << " " << TIEDOT[a].koulumatka <<
+            " " << TIEDOT[a].hattukoko << endl;
+            break;
+        }
+
+        if (a == taulunkoko - 1 && TIEDOT[a].etunimi != nimi) {
+            cout << endl << "Ei löytynyt henkilöä: " << nimi << endl;
+            break;
+        }
+    }
 }
