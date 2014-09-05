@@ -63,10 +63,18 @@ int main(void)
                 LisaaHenkilo(hRekisteri,pTauluKoko);
         }
 
-        /** Listaa henkilötiedot
+        /** Listaa käyttäjän haluaman
+        *   henkilön tiedot
+        *
+        */
+        else if (valinta==2) {
+            TulostaHenkilo(hRekisteri);
+        }
+
+        /** Listaa kaikki henkilötiedot
         *   taulukosta
         */
-        else if (valinta == 2) {
+        else if (valinta == 3) {
             TulostaKaikkiHenkilot(hRekisteri, taulunkoko);
             /** for (int a = 0; a < taulunkoko; a++) {
             *   cout << "Henkilö " << a << ": " << hRekisteri[a].etunimi << " "
@@ -89,7 +97,8 @@ int valikko(void) {
     cout << "VALIKKO" << endl;
     cout << "0 - Lopeta" << endl;
     cout << "1 - Lisaa henkilo" << endl;
-    cout << "2 - Listaa kaikki henkilot" << endl;
+    cout << "2 - Listaa tietty henkilo" << endl;
+    cout << "3 - Listaa kaikki henkilot" << endl;
     cin >> valinta;
     return valinta;
 }
