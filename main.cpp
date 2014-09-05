@@ -20,19 +20,19 @@ struct tietue {
     tietue(): etunimi("empty"), koulumatka(0.0), hattukoko(0) {}
 };
 
-const int taulunkoko = 2;
+int taulunkoko = 2;
 
 int valikko(void);
 void TulostaHenkilo(tietue TIEDOT[]);
 void TulostaKaikkiHenkilot(tietue TIEDOT[], int lkm);
+void LisaaHenkilo(tietue TIEDOT[], int *lkm);
 
-int main()
+int main(void)
 {
     // tietuetaulukon kokona 10 alkiota
     tietue hRekisteri[taulunkoko];
     int valinta = 99;
     int kohta = 0;
-    bool taynna = false;
 
     do {
         valinta = valikko();
@@ -43,30 +43,8 @@ int main()
         *   henkilötietoja.
         */
         else if (valinta == 1) {
-                for (int a = 0; a < taulunkoko; a++) {
-                    if (hRekisteri[a].etunimi == "empty") {
-                        kohta = a;
-                        break;
-                    }
-                }
-
-                if (!taynna) {
-                    string eNimi;
-                    float kMatka;
-                    int hKoko;
-                    cout << "Henkilön etunimi" << endl;
-                    cin >> eNimi;
-                    cout << "Henkilön koulumatka" << endl;
-                    cin >> kMatka;
-                    cout << "Henkilön hatun koko" << endl;
-                    cin >> hKoko;
-                    hRekisteri[kohta].etunimi = eNimi;
-                    hRekisteri[kohta].koulumatka = kMatka;
-                    hRekisteri[kohta].hattukoko = hKoko;
-                    if (kohta == taulunkoko - 1) { taynna = true; }
-                }
-
-                else if (taynna) { cout << endl << "Taulukko täynnä!" << endl; }
+                int* pTauluKoko = &taulunkoko;
+                LisaaHenkilo(hRekisteri,pTauluKoko);
         }
 
         /** Listaa henkilötiedot
@@ -123,9 +101,39 @@ void TulostaHenkilo(tietue TIEDOT[]) {
 *   taulukossa TIEDOT
 *
 */
-void TulostaKaikkiHenkilot(tietue TIEDOT [], int lkm) {
+void TulostaKaikkiHenkilot(tietue TIEDOT[], int lkm) {
     for (int a = 0; a < lkm; a++) {
         cout << "Henkilö " << a << ": " << TIEDOT[a].etunimi << " "
         << TIEDOT[a].koulumatka << " " << TIEDOT[a].hattukoko << endl;
     }
+}
+
+void LisaaHenkilo(tietue TIEDOT[], int *lkm) {
+    int listattavaa = lkm;
+    int kohta = 99;
+    bool taynna = false;
+    for (int a = 0; a < listattavaa; a++) {
+        if (TIEDOT[a].etunimi == "empty") {
+            kohta = a;
+            break;
+        }
+    }
+
+    if (!taynna) {
+        string eNimi;
+        float kMatka;
+        int hKoko;
+        cout << "Henkilön etunimi" << endl;
+        cin >> eNimi;
+        cout << "Henkilön koulumatka" << endl;
+        cin >> kMatka;
+        cout << "Henkilön hatun koko" << endl;
+        cin >> hKoko;
+        TIEDOT[kohta].etunimi = eNimi;
+        TIEDOT[kohta].koulumatka = kMatka;
+        TIEDOT[kohta].hattukoko = hKoko;
+        if (kohta == listattavaa - 1) { taynna = true; }
+    }
+
+    else if (taynna) { cout << endl << "Taulukko täynnä!" << endl; }
 }
