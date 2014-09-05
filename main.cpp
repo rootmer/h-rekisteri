@@ -24,6 +24,7 @@ const int taulunkoko = 2;
 
 int valikko(void);
 void TulostaHenkilo(tietue TIEDOT[]);
+void TulostaKaikkiHenkilot(tietue TIEDOT[], int lkm);
 
 int main()
 {
@@ -72,10 +73,12 @@ int main()
         *   taulukosta
         */
         else if (valinta == 2) {
-            for (int a = 0; a < taulunkoko; a++) {
-            cout << "Henkilö " << a << ": " << hRekisteri[a].etunimi << " "
-            << hRekisteri[a].koulumatka << " " << hRekisteri[a].hattukoko << endl;
-            }
+            TulostaKaikkiHenkilot(hRekisteri, taulunkoko);
+            /** for (int a = 0; a < taulunkoko; a++) {
+            *   cout << "Henkilö " << a << ": " << hRekisteri[a].etunimi << " "
+            *   << hRekisteri[a].koulumatka << " " << hRekisteri[a].hattukoko << endl;
+            *   }
+            */
         }
 
         else cout << "Valitse uudelleen";
@@ -113,5 +116,12 @@ void TulostaHenkilo(tietue TIEDOT[]) {
             cout << endl << "Ei löytynyt henkilöä: " << nimi << endl;
             break;
         }
+    }
+}
+
+void TulostaKaikkiHenkilot(tietue TIEDOT [], int lkm) {
+    for (int a = 0; a < lkm; a++) {
+        cout << "Henkilö " << a << ": " << TIEDOT[a].etunimi << " "
+        << TIEDOT[a].koulumatka << " " << TIEDOT[a].hattukoko << endl;
     }
 }
